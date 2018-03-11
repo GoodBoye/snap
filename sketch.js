@@ -6,20 +6,22 @@ var sprites = [];
 var spriteLock = {};
 var mask1 = {};
 var mask2 = {};
+var polaroid = {};
+var saveRequest = true;
 
 
 function setup() {
 	createCanvas(windowWidth, windowHeight);
 
-	mask2.image = loadImage("images/mask2.png", function() {
-		mask2.xSize = mask2.image.width;
-		mask2.ySize = mask2.image.height;
-		mask2.name = "mask2";
+	// mask2.image = loadImage("images/mask2.png", function() {
+	// 	mask2.xSize = mask2.image.width;
+	// 	mask2.ySize = mask2.image.height;
+	// 	mask2.name = "mask2";
 		// console.log(mainChar.image.height)
 		// console.log(mainChar.image.width)
-	});
+	// });
 
-	mask1.image = loadImage("images/mask1.png", function() {
+	mask1.image = loadImage("images/ar_fiftween.png", function() {
 		mask1.xSize = mask1.image.width;
 		mask1.ySize = mask1.image.height;
 		mask1.name = "mask1";
@@ -34,14 +36,14 @@ function setup() {
 		// console.log(mainChar.image.height)
 		// console.log(mainChar.image.width)
 	});
-	hat1.image = loadImage("images/afhat1.png", function() {
+	hat1.image = loadImage("images/afhat2.png", function() {
 		hat1.xSize = hat1.image.width;
 		hat1.ySize = hat1.image.height;
 		hat1.name = "hat1";
 		// console.log(hat1.image.height)
 		// console.log(hat1.image.width)
 	});
-	glasses1.image = loadImage("images/3dglasses1tran.png", function() {
+	glasses1.image = loadImage("images/3dglassestran.png", function() {
 		glasses1.xSize = glasses1.image.width;
 		glasses1.ySize = glasses1.image.height;
 		glasses1.name = "glasses1";
@@ -49,10 +51,18 @@ function setup() {
 		// console.log(glasses1.image.width)
 	});
 
-	mainCharHands.image = loadImage("images/mainCharhands.png", function() {
+	mainCharHands.image = loadImage("images/mainCharHands.png", function() {
 		mainCharHands.xSize = mainCharHands.image.width;
 		mainCharHands.ySize = mainCharHands.image.height;
 		mainCharHands.name = "mainCharHands";
+		// console.log(glasses1.image.height)
+		// console.log(glasses1.image.width)
+	});
+
+	polaroid.image = loadImage("images/polaroid.png", function() {
+		polaroid.xSize = polaroid.image.width;
+		polaroid.ySize = polaroid.image.height;
+		polaroid.name = "polaroid";
 		// console.log(glasses1.image.height)
 		// console.log(glasses1.image.width)
 	});
@@ -65,12 +75,12 @@ function setup() {
 	glasses1.y = 200;
 	mask1.x = 300;
 	mask1.y = 100;
-	mask2.x = 400;
-	mask2.y = 100;
+	// mask2.x = 400;
+	// mask2.y = 100;
 	mainCharHands.x = 500;
 	mainCharHands.y = 100;
 
-	sprites.push(mainChar, mask1, mask2, hat1,glasses1, mainCharHands);
+	sprites.push(mainChar, mask1, hat1, glasses1, mainCharHands); //rm mainCharHands, mask2
 }
 
 function draw() {
@@ -81,6 +91,7 @@ function draw() {
 	resizeLocked();
 	drawsprites();
 	drawControls();
+	//drawPolaroidOverlay();
 }
 
 function drawControls() {
@@ -91,14 +102,17 @@ function drawControls() {
 
 function snap() {
 	console.log('Snap!');
+	polaroid.x = (windowWidth/2)-polaroid.xSize/2;
+	polaroid.y = 50;
+	sprites.push(polaroid);
 }
 
 function drawsprites() {
 	for (var i=0; i<sprites.length; i++) {
 		image(sprites[i].image, sprites[i].x, sprites[i].y, sprites[i].xSize, sprites[i].ySize);
-		console.log(sprites[i].name);
-		console.log("Width:" + sprites[i].xSize);
-		console.log("Height:" + sprites[i].ySize);
+		// console.log(sprites[i].name);
+		// console.log("Width:" + sprites[i].xSize);
+		// console.log("Height:" + sprites[i].ySize);
 		//ellipse(sprites[i].x+sprites[i].xSize/2,sprites[i].y+sprites[i].ySize/2, 20, 20);
 	}
 }
